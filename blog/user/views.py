@@ -2,7 +2,10 @@ from flask import Blueprint
 from flask import render_template
 
 user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
-USERS=['Alice','Jon','Mike']
+USERS={
+    1:'Alice',
+    2:'Jon',
+    3:'Mike'}
 
 
 @user.route('/')
