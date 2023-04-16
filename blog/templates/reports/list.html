@@ -7,10 +7,10 @@ Users list
 
   <div class="row align-items-start">
     <div class="col">
-      <h1>Users:</h1>
-  {%for user_id in users%}
+      <h1>Report list:</h1>
+  {%for report in reports%}
         <ul>
-            <li> <a href="{{url_for('user.get_user',pk=user_id)}}">{{users[user_id]}}</a>
+            <li> <a href="">{{report}}</a>
                 </li>
         </ul>
   {% endfor %}
