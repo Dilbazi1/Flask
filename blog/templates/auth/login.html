@@ -1,0 +1,36 @@
+{% extends 'base.html'  %}
+{%
+block title %}
+Login
+{% endblock %}
+{%block body%}
+
+  <div class="row align-items-start">
+    <div class="col">
+      {% with  messages=get_flashed_messages()%}
+        {% if messages%}
+          <div class="alert alert-danger" role="alert">
+            {{messages[0]}}
+          </div>
+        {%endif%}
+      {%endwith%}
+        <form class="row g-3" method="post"  action="{{url_for('auth.login')}}">
+  <div class="col-auto">
+    <label for="staticEmail2" class="visually-hidden">Email</label>
+    <input type="text"  name="email" class="form-control-plaintext" id="staticEmail2" placeholder="email@example.com">
+  </div>
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">Password</label>
+    <input type="password" name="password" class="form-control" id="inputPassword2" placeholder="Password">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3">Login</button>
+  </div>
+</form>
+    </div>
+
+
+  </div>
+
+
+{% endblock %}
