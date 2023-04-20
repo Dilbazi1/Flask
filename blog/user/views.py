@@ -18,7 +18,7 @@ def user_list():
 
 
 @user.route('/<int:pk>')
-# @login_required
+@login_required
 def profile(pk: int):
     from blog.models.user import User
 
