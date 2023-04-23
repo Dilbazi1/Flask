@@ -6,6 +6,10 @@ app=create_app()
 if __name__ == "__main__":
     app = create_app()
 
+
+
+
+
     app.run(
         host="0.0.0.0",
         # port=8001,
@@ -13,7 +17,7 @@ if __name__ == "__main__":
     )
 @app.cli.command("init-db")
 def init_db():
-
+    from blog.models import User
     db.create_all()
     print("done!")
 @app.cli.command("create-users")

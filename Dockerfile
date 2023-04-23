@@ -10,4 +10,4 @@ COPY blog ./blog
 
 EXPOSE 5000
 
-CMD ["python", "wsgi.py"]
+CMD ["python", "wsgi.py" ,"-p","5000:5000"]
