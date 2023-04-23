@@ -21,6 +21,7 @@ def login():
         flash("Check your login details")
         return redirect(url_for(".login"))
     login_user(user)
+
     return redirect(url_for("user.profile", pk=user.id))
 
 
