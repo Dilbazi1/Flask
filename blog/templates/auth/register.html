@@ -6,7 +6,7 @@ User register
 {%block body%}
 <form method="Post">
     {{ form.csrf_token }}
-    {% for field in ['username','firstname','lastname','email','password']%}
+    {% for field in ['username','firstname','lastname','email','password','confirm_password']%}
       {{ render_field(form[field])}}
     {% endfor %}
 
