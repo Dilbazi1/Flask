@@ -1,0 +1,20 @@
+{% extends 'base.html'  %}
+{% from "macro/formhelpers.html" import render_field %}
+{%block title %}
+User register
+{% endblock %}
+{%block body%}
+<form method="Post">
+    {{ form.csrf_token }}
+    {% for field in ['username','firstname','lastname','email','password','confirm_password']%}
+      {{ render_field(form[field])}}
+    {% endfor %}
+
+    {{ form.submit(class="btn btn-primary mb-3")}}
+
+
+</form>
+
+
+
+{% endblock %}
