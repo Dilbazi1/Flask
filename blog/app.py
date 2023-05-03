@@ -4,6 +4,7 @@ from blog.auth.views import auth
 from blog.report.views import report
 from blog.user.views import user
 from blog.article.views import article
+from blog.author.views import author
 from blog.models.database import db
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -52,4 +53,5 @@ def register_blueprints(app: Flask):
     app.register_blueprint(report)
     app.register_blueprint(article)
     app.register_blueprint(auth)
+    app.register_blueprint(author)
     app.config["SECRET_KEY"] = "qwasaersdadafafafafaasdas"
