@@ -23,11 +23,12 @@ class User(db.Model, UserMixin):
 
 class Author(db.Model):
     __tablename__ = 'authors'
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
+
     user = relationship('User', back_populates='author')
     articles = relationship('Article', back_populates='author')
-
 
 class Article(db.Model):
     __tablename__ = 'articles'
