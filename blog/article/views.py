@@ -10,6 +10,7 @@ article = Blueprint('article', __name__, url_prefix='/articles', static_folder='
 
 
 @article.route('/', methods=['GET'])
+@login_required
 def article_list():
     articles: Article = Article.query.all()
     return render_template(
@@ -19,6 +20,7 @@ def article_list():
 
 
 @article.route('/<int:article_id>/', methods=['GET'])
+@login_required
 def article_detail(article_id):
     _article: Article = Article.query.filter_by(id=article_id).one_or_none()
     if _article is None:
