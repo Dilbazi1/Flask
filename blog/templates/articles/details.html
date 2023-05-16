@@ -1,15 +1,22 @@
-
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-    Article details
+    {{ article.title }}
 {% endblock %}
+
 {% block body %}
-    <h1>
-        {{ title }}
-    </h1>
-    <br>
-    {{ text }}
-    <br>
-    <a href="#">{{ author }}</a>
+    <div class="row">
+        <h1>{{ article.title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">{{ article.text }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div><small class="text-muted">Author: {{ article.author.user.firstname }} {{ article.author.user.lastname }}</small></div>
+            <div><small class="text-muted">Created at: {{ article.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+            <div><small class="text-muted">Updated at: {{ article.updated_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+        </div>
+    </div>
 {% endblock %}
