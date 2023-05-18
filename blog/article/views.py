@@ -71,3 +71,10 @@ def create_article():
         return redirect(url_for('article.article_detail', article_id=_article.id))
 
     return render_template('articles/create.html', form=form)
+@article.route("/<string:tag_name>/", endpoint="filter")
+def articles_list(tag_name: str):
+    articles = Article.query.options(joinedload(Article.tags)).filter(
+
+        Article.tags.any(Tag.name.contains(tag_name))
+    )
+    return render_template("articles/list.html", articles=articles)
