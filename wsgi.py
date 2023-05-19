@@ -1,3 +1,5 @@
+import click as click
+
 from blog.app import create_app
 from blog.models.database import db
 from werkzeug.security import generate_password_hash
@@ -30,3 +32,12 @@ def create_users():
     db.session.add(james)
     db.session.commit()
     print("done! created users:", admin, james)
+@app.cli.command("create_init_tags")
+def create_init_tags():
+    from blog.models.user import Tag
+    with app.app_context():
+        tags = ('flask', 'django', 'python', 'gb', 'sqlite')
+        for item in tags:
+            db.session.add(Tag(name=item))
+        db.session.commit()
+    click.echo(f'Created tags: {", ".join(tags)}')
