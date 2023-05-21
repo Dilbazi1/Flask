@@ -14,6 +14,7 @@ zipp==3.15.0
 psycopg2-binary==2.9.5
 Flask-Migrate==4.0.4
 Flask-WTF==1.1.1
+FLASK-ADMIN= 1.6.1
 
 WTForms==3.0.1
 email-validator==2.0.0

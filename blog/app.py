@@ -9,8 +9,11 @@ from blog.models.database import db
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_wtf import CSRFProtect
+from flask_admin import Admin
+from blog.admin.__init__  import admin
 
 login_manager = LoginManager()
+# admin=Admin(name='Blog Admin Panel',template_mode='bootstrap4')
 
 
 def create_app() -> Flask:
@@ -28,6 +31,7 @@ def create_app() -> Flask:
 
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    admin.init_app(app)
     from .models.user import User
     @login_manager.user_loader
     def load_user(user_id):
@@ -49,9 +53,12 @@ def create_app() -> Flask:
 
 
 def register_blueprints(app: Flask):
+    from blog import admin
+
     app.register_blueprint(user)
     app.register_blueprint(report)
     app.register_blueprint(article)
     app.register_blueprint(auth)
     app.register_blueprint(author)
     app.config["SECRET_KEY"] = "qwasaersdadafafafafaasdas"
+
