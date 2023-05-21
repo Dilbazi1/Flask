@@ -2,6 +2,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 from flask import redirect, url_for
+from flask_admin import AdminIndexView, expose
 
 
 class CustomAdminView(ModelView):
@@ -16,12 +17,20 @@ class CustomAdminView(ModelView):
             endpoint = endpoint.replace('.', '_admin.')
         return super().get_url(endpoint, **kwargs)
 
-    #
-    # def is_accessible(self):
-    #     return current_user.is_authenticated and current_user.is_staff
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.is_staff
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('auth.login'))
+
+
+class CustomAdminIndexView(AdminIndexView):
+
+    @expose()
+    def index(self):
+        if not (current_user.is_authenticated and current_user.is_staff):
+            return redirect(url_for('auth.login'))
+        return super().index()
 
 
 class ArticleAdminView(CustomAdminView):
