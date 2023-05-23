@@ -1,24 +1,15 @@
-import click as click
-
-from blog.app import create_app
-from blog.models.database import db
+import click
 from werkzeug.security import generate_password_hash
-app=create_app()
 
-if __name__ == "__main__":
-    app = create_app()
+from blog.extensions import db
 
-    app.run(
-        host="0.0.0.0",
-        # port=8001,
-        debug=True
-    )
-@app.cli.command("init-db")
+
+@click.command("init-db")
 def init_db():
     from blog.models import User
     db.create_all()
     print("done!")
-@app.cli.command("create-users")
+@click.command("create-users")
 def create_users():
 
     from blog.models import User
@@ -28,7 +19,7 @@ def create_users():
     db.session.add(james)
     db.session.commit()
     print("done! created users:", admin, james)
-@app.cli.command("create_init_tags")
+@click.command("create_init_tags")
 def create_init_tags():
     from blog.models.user import Tag
     with app.app_context():
