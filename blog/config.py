@@ -1,26 +1,24 @@
 import os
 
+from dotenv import load_dotenv
 
-class BaseConfig:
-    DEBUG = False
-    TESTING = False
-    SECRET_KEY = '4s6=rc(wpw#+qas@e$^_#p_jx!_#bsw=1&u*i-qp@u%+*q&&*f'
-    SQLALCHEMY_DATABASE_URI = "sqlite:///../db.sqlite"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-    WTF_CSRF_ENABLED = True
-    FLASK_ADMIN_SWATCH = 'cosmo'
+from blog.enums import EnvType
 
+load_dotenv()
 
+ENV = os.getenv('FLASK_ENV', default=EnvType.PRODUCTION)
+DEBUG = ENV == EnvType.DEVELOPMENT
 
-class DevConfig(BaseConfig):
-    SECRET_KEY = '4s6=rc(wpw#+qas@e$^_#p_jx!_#bsw=1&u*i-qp@u%+*q&&*f'
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
+SECRET_KEY = os.getenv('SECRET_KEY')
 
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-class TestingConfig(BaseConfig):
-    TESTING = True
+WTF_CSRF_ENABLED = True
 
-class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+FLASK_ADMIN_SWATCH = 'pulse'
+
+OPENAPI_URL_PREFIX = '/api/docs'
+OPENAPI_VERSION = '3.0.0'
+OPENAPI_SWAGGER_UI_PATH = '/'
+OPENAPI_SWAGGER_UI_VERSION = '3.51.1'  # see version on https://cdnjs.com/libraries/swagger-ui
