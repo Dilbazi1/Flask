@@ -5,6 +5,7 @@ from blog.api.article import ArticleDetail, ArticleList
 from blog.api.author import AuthorDetail, AuthorList
 from blog.api.user import UserDetail, UserList
 from combojsonapi.event import EventPlugin
+from combojsonapi.permission import PermissionPlugin
 
 
 
@@ -23,8 +24,9 @@ def create_api_spec_plugin(app):
 def init_api(app):
     api = Api(app)
     event_plugin = EventPlugin()
+    permission_plugin = PermissionPlugin(strict=False)
     api_spec_plugin = create_api_spec_plugin(app)
-    api = Api(app=app, plugins=[api_spec_plugin, event_plugin, ])
+    api = Api(app=app, plugins=[api_spec_plugin, event_plugin, permission_plugin])
     # api = Api(app=app, plugins=[api_spec_plugin])
     api.route(TagList, "tag_list", "/api/tags/")
     api.route(TagDetail, "tag_detail", "/api/tags/<int:id>/")
